@@ -1,0 +1,1 @@
+// stockMovement.model.ts

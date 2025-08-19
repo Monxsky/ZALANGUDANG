@@ -1,0 +1,1 @@
+// outbox.model.ts
