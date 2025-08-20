@@ -6,6 +6,10 @@ const usersRouter = require('./routes/users');
 const app = express();
 app.use(express.json());
 
+const transactionsRouter = require("./services/transactions");
+app.use("/transactions", transactionsRouter);
+
+
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', message: 'WMS Backend is running' });
 });

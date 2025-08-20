@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WMS Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="sidebar">
+  <h2>WMS Dashboard</h2>
+  <a href="#" onclick="showPage('users')">Users</a>
+  <a href="#" onclick="showPage('products')">Products</a>
+  <a href="#" onclick="showPage('transactions')">Transactions</a>
+</div>
+
+<div class="content">
+  <!-- Users Page -->
+  <div id="users" class="page">
+    <h2>Users</h2>
+    <button onclick="openModal('user')">Add User</button>
+    <table>
+      <thead><tr><th>ID</th><th>Username</th><th>Email</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Alice</td><td>alice@example.com</td></tr>
+        <tr><td>2</td><td>Bob</td><td>bob@example.com</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Products Page -->
+  <div id="products" class="page hidden">
+    <h2>Products</h2>
+    <button onclick="openModal('product')">Add Product</button>
+    <table>
+      <thead><tr><th>ID</th><th>Name</th><th>Description</th><th>Price</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Widget A</td><td>Basic widget</td><td>$10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Transactions Page -->
+  <div id="transactions" class="page hidden">
+    <h2>Transactions</h2>
+    <button onclick="openModal('transaction')">Add Transaction</button>
+    <table>
+      <thead><tr><th>ID</th><th>Total Price</th><th>Created At</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>$30</td><td>2025-08-19</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3 id="modal-title"></h3>
+    <form id="modal-form" onsubmit="submitForm(event)">
+      <div id="modal-fields"></div>
+      <button type="submit">Save</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

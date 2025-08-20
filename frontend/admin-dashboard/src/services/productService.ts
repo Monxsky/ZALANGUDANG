@@ -1,25 +1,27 @@
 // src/services/productService.ts
 import api from "./api";
 
-export interface Product {
+export interface product {
   id: number;
   name: string;
-  description: string;
+  description?: string | null;
   price: number;
+  sku?: string;
+  stock?: number;
 }
 
-export const getProducts = async (): Promise<Product[]> => {
+export const getProducts = async (): Promise<product[]> => {
   const res = await api.get("/products");
   return res.data;
 };
 
-export const createProduct = async (data: Omit<Product, "id">) => {
-  const res = await api.post("/products", data);
+export const createProduct = async (product: Partial<product>) => {
+  const res = await api.post("/products", product);
   return res.data;
 };
 
-export const updateProduct = async (id: number, data: Partial<Product>) => {
-  const res = await api.put(`/products/${id}`, data);
+export const updateProduct = async (id: number, product: Partial<product>) => {
+  const res = await api.put(`/products/${id}`, product);
   return res.data;
 };
 

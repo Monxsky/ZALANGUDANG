@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZALAN GROUP</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <div id="loading" class="loading-spinner" style="display:none;">
+    <div class="spinner"></div>
+    <p>Loading data...</p>
+</div>
+
+    <!-- Header -->
+    <header>
+      <h1>📊 ZALAN GROUP</h1>
+      <div class="action-btns">
+        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        <button onclick="getUsers()">🔄 Load Data</button>
+      </div>
+    </header>
+
+    <!-- Cards -->
+    <section class="cards">
+      <div class="card">
+        <h2>Total User</h2>
+        <p id="totalUsers">0</p>
+      </div>
+      <div class="card">
+        <h2>Last Update</h2>
+        <p id="lastUpdate">-</p>
+      </div>
+    </section>
+
+    <!-- Table -->
+    <section class="table-section">
+      <h2>Daftar User</h2>
+      <input 
+    type="text" 
+    id="searchInput" 
+    placeholder="🔍 Cari nama atau email..." 
+    onkeyup="filterTable()" 
+  />
+      <table id="userTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Kota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data masuk sini -->
+        </tbody>
+      </table>
+    </section>
+
+  </div>
+
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

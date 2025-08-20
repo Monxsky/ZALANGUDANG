@@ -1,55 +1,70 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { getUsers, createUser, User } from "../services/userService";
+import Modal from "../components/modal";
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-export default function Users() {
+const UsersPage: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:4000/users")
-      .then((res) => {
-        setUsers(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to fetch users");
-        setLoading(false);
-        console.error(err);
+  const fetchUsers = async () => {
+    setLoading(true);
+    try {
+      const data = await getUsers();
+      setUsers(data);
+    } catch (err) {
+      console.error("Failed to fetch users", err);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => { fetchUsers(); }, []);
+
+  const handleAddUser = async () => {
+    try {
+      await createUser({
+        username, email,
+        role: "admin"
       });
-  }, []);
-
-  if (loading) return <p className="p-4">Loading...</p>;
-  if (error) return <p className="p-4 text-red-500">{error}</p>;
+      setIsModalOpen(false);
+      setUsername("");
+      setEmail("");
+      fetchUsers();
+    } catch (err) { console.error(err); }
+  };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Users List</h1>
-      <table className="w-full border border-gray-300 rounded-lg overflow-hidden">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="p-2 border">ID</th>
-            <th className="p-2 border">Name</th>
-            <th className="p-2 border">Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id} className="text-center">
-              <td className="p-2 border">{user.id}</td>
-              <td className="p-2 border">{user.name}</td>
-              <td className="p-2 border">{user.email}</td>
+    <div style={{ padding: 20, flex: 1 }}>
+      <h2>Users</h2>
+      <button onClick={() => setIsModalOpen(true)}>Add User</button>
+      {loading ? <p>Loading...</p> : (
+        <table style={{ width: "100%", marginTop: 10, borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th>ID</th><th>Username</th><th>Email</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {users.map(u => (
+              <tr key={u.id}>
+                <td>{u.id}</td>
+                <td>{u.username}</td>
+                <td>{u.email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      <Modal isOpen={isModalOpen} title="Add User" onClose={() => setIsModalOpen(false)}>
+        <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} style={{ width: "100%", marginBottom: 10 }} />
+        <input placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} style={{ width: "100%", marginBottom: 10 }} />
+        <button onClick={handleAddUser}>Save</button>
+      </Modal>
     </div>
   );
-}
+};
+
+export default UsersPage;
