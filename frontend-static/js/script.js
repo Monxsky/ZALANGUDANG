@@ -1,5 +1,57 @@
 let usersData = [];
 
+// Toggle buka/tutup submenu
+document.querySelectorAll(".dropdown").forEach(item => {
+  item.addEventListener("click", (e) => {
+    // biar submenu toggle, tapi gak langsung tutup semua
+    e.stopPropagation();
+    item.classList.toggle("active");
+  });
+});
+
+// Dark mode toggle
+function toggleDarkMode() {
+  document.body.classList.toggle("dark");
+}
+
+// Collapse sidebar
+const sidebar = document.getElementById("sidebar");
+const mainContent = document.getElementById("main-content");
+const toggleBtn = document.getElementById("toggleBtn");
+
+toggleBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("collapsed");
+  if (sidebar.classList.contains("collapsed")) {
+    mainContent.style.marginLeft = "70px";
+    mainContent.style.width = "calc(100% - 70px)";
+  } else {
+    mainContent.style.marginLeft = "240px";
+    mainContent.style.width = "calc(100% - 240px)";
+  }
+});
+
+// Highlight menu aktif
+const menuItems = document.querySelectorAll(".menu > li");
+const submenuItems = document.querySelectorAll(".submenu li");
+
+// Menu utama
+menuItems.forEach(item => {
+  item.addEventListener("click", () => {
+    menuItems.forEach(i => i.classList.remove("active-main")); 
+    item.classList.add("active-main");
+  });
+});
+
+// Submenu
+submenuItems.forEach(sub => {
+  sub.addEventListener("click", (e) => {
+    e.stopPropagation(); // biar gak nutup parent
+    submenuItems.forEach(s => s.classList.remove("active-sub")); 
+    sub.classList.add("active-sub");
+  });
+});
+
+
 // ambil data user dari dummy API
 async function getUsers() {
 

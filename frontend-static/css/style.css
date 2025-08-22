@@ -52,6 +52,8 @@ body.dark .table-section input {
 
 /* Body */
 body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
   background: #f5f7fb;
   color: #333;
   line-height: 1.6;
@@ -60,15 +62,15 @@ body {
 
 /* Container */
 .container {
-  width: 95%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  max-width: 100%; /* biar isi full layar */
 }
 
 /* Header */
 header {
-  background: #4a90e2;
+  background: #f0c505;
   color: white;
   padding: 20px;
   border-radius: 12px;
@@ -212,4 +214,197 @@ body.dark table td {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;                 /* ukuran fix */
+  height: 100vh;
+  flex-shrink: 0;
+  background: #1e293b;
+  color: #ecf0f1;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+}
+
+/* Sidebar collapse */
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  white-space: wrap;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed h2 {
+  opacity: 0;
+}
+
+/* Menu */
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu > li {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: block;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu > li:hover {
+  background: #334155;
+}
+
+.menu i {
+  margin-right: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.menu span {
+  flex: 1;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar.collapsed .menu span {
+  opacity: 0;
+}
+
+/* Submenu */
+.submenu {
+  list-style: none;
+  padding-left: 35px;
+  display: none;
+  flex-direction: column;
+  background: #172335;
+}
+
+.submenu li {
+  padding: 10px 15px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: block;
+}
+
+.submenu li:hover {
+  background: #ffbb00;
+}
+
+.active > .submenu {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+
+/* Collapse Button */
+.toggle-btn {
+  position: center;
+  top: 10px;
+  right: 15px;
+  background: #1e293b;
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: center;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid #475569;
+}
+
+/* Content */
+.content {
+  margin-left: 220px;
+  padding: 20px;
+  flex: 1;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed ~ .content {
+  margin-left: 20px;
+}
+.menu > li.active-main {
+  background: #0f172a; /* lebih gelap */
+}
+
+.submenu li.active-sub {
+  background: #ffffff; /* biru */
+  color: #fff;
+  font-weight: bold;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#main-content {
+  flex: 1;               /* ambil sisa ruang */
+  padding: 20px;
+  transition: margin-left 0.3s ease, width 0.3s ease;
+  background: #f5f7fb;
+}
+
+/* Kalau sidebar collapse */
+.sidebar.collapsed ~ #main-content {
+  margin-left: 70px;
+  width: calc(100%-70px);
+}
+
+body.dark {
+  background: #1e1e2f;
+  color: #f5f5f5;
+}
+
+body.dark header {
+  background: #2a2a40;
+}
+
+body.dark button {
+  background: #5c5cff;
+}
+
+body.dark button:hover {
+  background: #4a4ad1;
+}
+
+body.dark .card {
+  background: #2a2a40;
+  color: #f5f5f5;
+}
+
+body.dark .table-section {
+  background: #2a2a40;
+}
+
+body.dark table th {
+  background: #3a3a55;
+  color: #fff;
+}
+
+body.dark table td {
+  color: #ddd;
 }
