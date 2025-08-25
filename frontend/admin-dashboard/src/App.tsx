@@ -1,51 +1,25 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from "react";
 import Dashboard from "./pages/dashboard";
-import Products from "./pages/products";
-import SKUs from "./pages/skus";
-import Transactions from "./pages/transactions";
-import Navbar from './components/navbar';
-import Login from "./pages/Login";
-import PrivateRoute from "./components/PrivateRoute";
-import Users from "./pages/Users";
-import Sidebar from "./components/Sidebar";
-import UsersPage from "./pages/Users";
-import ProductsPage from "./pages/products";
-import TransactionsPage from "./pages/transactions";
 
-const App: React.FC = () => {
-  const [page, setPage] = useState<"users" | "products" | "transactions">("users");
-
-  const renderPage = () => {
-    switch (page) {
-      case "users":
-        return <UsersPage />;
-      case "products":
-        return <ProductsPage />;
-      case "transactions":
-        return <TransactionsPage />;
-      default:
-        return <UsersPage />;
-    }
-  };
-
+export default function App() {
   return (
-    <Router>
-      <Navbar />
-      <div style={{ padding: "20px" }}>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/skus" element={<SKUs />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/users" element={<Users />} />
-        </Routes>
-        {/* contoh penggunaan renderPage */}
-        {/* {renderPage()} */}
-      </div>
-    </Router>
-  );
-};
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <aside className="w-64 bg-gray-800 text-white p-4">
+        <h2 className="text-xl font-bold mb-6">ZALAN GROUP</h2>
+        <ul>
+          <li className="mb-2 cursor-pointer hover:bg-gray-700 p-2 rounded">Dashboard</li>
+          <li className="mb-2 cursor-pointer hover:bg-gray-700 p-2 rounded">SKUs</li>
+          <li className="mb-2 cursor-pointer hover:bg-gray-700 p-2 rounded">Products</li>
+          <li className="mb-2 cursor-pointer hover:bg-gray-700 p-2 rounded">Transactions</li>
+          <li className="mb-2 cursor-pointer hover:bg-gray-700 p-2 rounded">Users</li>
+        </ul>
+      </aside>
 
-export default App;
+      {/* Main Content */}
+      <main className="flex-1 p-6">
+        <Dashboard />
+      </main>
+    </div>
+  );
+}

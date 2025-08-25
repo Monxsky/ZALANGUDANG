@@ -4,118 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZALAN GROUP</title>
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Tailwind CSS -->
+  <link href="css/tailwind.css" rel="stylesheet">
 </head>
-<body>
-  <div class="wrapper">
-    <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main Sidebar">
-      <div class="toggle-btn" id="toggleBtn">
-        <i class="fas fa-bars"></i>
-      </div>
-      <ul class="menu">
-        <li class="dropdown">
-          <i class="fas fa-clipboard-list"></i><span>Pesanan</span><i class="fas fa-chevron-down"></i>
-          <ul class="submenu">
-            <li><a href="#">Menunggu di Cetak</a></li>
-            <li><a href="#">Menunggu di Pickup</a></li>
-            <li><a href="#">Pengembalian</a></li>
-            <li><a href="#">Pembatalan</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <i class="fas fa-box"></i><span>Data Produk</span><i class="fas fa-chevron-down"></i>
-          <ul class="submenu">
-            <li onclick="loadPage('jenis-produk')">Jenis Produk</li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <i class="fas fa-warehouse"></i><span>Stock Produk</span><i class="fas fa-chevron-down"></i>
-          <ul class="submenu">
-            <li><a href="#">Stock Inbound</a></li>
-            <li><a href="#">Stock Outbound</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <i class="fas fa-industry"></i><span>Management Gudang</span><i class="fas fa-chevron-down"></i>
-          <ul class="submenu">
-            <li><a href="#">Gudang</a></li>
-            <li><a href="#">Inventory</a></li>
-            <li><a href="#">Display Produk</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <i class="fas fa-users"></i><span>User</span><i class="fas fa-chevron-down"></i>
-          <ul class="submenu">
-            <li><a href="#">Data User</a></li>
-          </ul>
-        </li>
-      </ul>
-    </aside>
-
-    <!-- Main Content -->
-    <main id="main-content">
-      <!-- Header -->
-      <header class="header">
-        <h1>📊 ZALAN GROUP</h1>
-        <div class="action-btns">
-          <button onclick="toggleDarkMode()">🌙 Mode Gelap</button>
-          <button onclick="getUsers()">🔄 Load Data</button>
-        </div>
-      </header>
-
-      <!-- Cards -->
-      <section class="cards">
-        <div class="card">
-          <h2>Total User</h2>
-          <p id="totalUsers">0</p>
-        </div>
-        <div class="card">
-          <h2>Last Update</h2>
-          <p id="lastUpdate">-</p>
-        </div>
-      </section>
-
-      <!-- Table -->
-      <section class="table-section">
-        <h2>Daftar User</h2>
-        <input 
-          type="text" 
-          id="searchBar" 
-          placeholder="🔍 Cari nama, email, atau kota..." 
-        />
-        <table id="userTable">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nama</th>
-              <th>Email</th>
-              <th>Kota</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Data masuk sini -->
-          </tbody>
-        </table>
-      </section>
-
-      <!-- Loading Spinner -->
-      <div id="loading" class="loading-spinner" style="display:none;">
-        <div class="spinner"></div>
-        <p>Loading data...</p>
-      </div>
-    </main>
-  </div>
-
-  <!-- Script -->
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="js/script.js"></script>
+<body class="bg-gray-100 text-gray-800">
+  <div id="root"></div>
+  <script src="/dist/bundle.js"></script>
 </body>
 </html>

@@ -1,24 +1,32 @@
-import axios, { AxiosHeaders } from "axios";
+import axios from "axios";
+import { SKU } from "../types/sku";
+import api from "../api";
 
-const instance = axios.create({
-  baseURL: "http://localhost:4000/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
+const API = axios.create({
+  baseURL: "http://localhost:4000", // sesuaikan dengan backendmu
 });
 
-instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+export default api;
 
-  if (!config.headers) {
-    config.headers = new AxiosHeaders(); // ✅ bikin kosong tapi sesuai tipe
-  }
+// GET all SKU
+export const fetchSKUs = async (): Promise<SKU[]> => {
+  const res = await API.get<SKU[]>("/sku");
+  return res.data;
+};
 
-  if (token) {
-    (config.headers as AxiosHeaders).set("Authorization", `Bearer ${token}`);
-  }
+// CREATE SKU
+export const createSKU = async (sku: Omit<SKU, "id">): Promise<SKU> => {
+  const res = await API.post<SKU>("/sku", sku);
+  return res.data;
+};
 
-  return config;
-});
+// UPDATE SKU
+export const updateSKU = async (id: number, sku: Partial<SKU>): Promise<SKU> => {
+  const res = await API.put<SKU>(`/sku/${id}`, sku);
+  return res.data;
+};
 
-export default instance;
+// DELETE SKU
+export const deleteSKU = async (id: number): Promise<void> => {
+  await API.delete(`/sku/${id}`);
+};
